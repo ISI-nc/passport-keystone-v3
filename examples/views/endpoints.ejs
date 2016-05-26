@@ -4,4 +4,8 @@
 <% } else { %>
 	<h2>Hello, <%= user.username %>.</h2>
   <p>Token: <%= user.token %><p>
+  <p>Service catalog entries</p>
+  <code><pre>
+    <%- JSON.stringify(user.serviceCatalog, null, 4) %>
+  </pre></code>
 <% } %>

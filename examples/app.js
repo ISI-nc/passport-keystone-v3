@@ -1,12 +1,12 @@
 var express = require('express'),
-passport = require('passport'),
-flash = require('connect-flash'),
-KeystoneStrategy = require('passport-keystone').Strategy,
-ProxyKeystone = require('proxy-keystone'),
-proxyKeystone = new ProxyKeystone({
-  userAgent: 'Custom Openstack Dashboard'
-});
-
+    passport = require('passport'),
+    flash = require('connect-flash'),
+    KeystoneStrategy = require('passport-keystone').Strategy,
+    ProxyKeystone = require('proxy-keystone'),
+    proxyKeystone = new ProxyKeystone({
+        userAgent: 'Custom Openstack Dashboard'
+    }),
+    config = require('./config');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -28,8 +28,8 @@ passport.deserializeUser(function(obj, done) {
 //   with a user object.  In the real world, this would query a database;
 //   however, in this example we are using a baked-in set of users.
 passport.use(new KeystoneStrategy({
-    authUrl: 'https://identity.api.rackspacecloud.com',
-    region: 'ord',
+    authUrl: config.openstackEndPoints.authUrl,
+    region: config.openstackEndPoints.region,
     passReqToCallback : true // allows us to interact with req object
 }, function(req, identity, done) {
   if (!req.user) {
@@ -77,8 +77,8 @@ app.get('/', function(req, res){
   res.render('index', { user: req.user });
 });
 
-app.get('/rackspace', function(req, res){
-  res.render('rackspace', { user: req.user });
+app.get('/endpoints', function(req, res){
+  res.render('endpoints', { user: req.user });
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
