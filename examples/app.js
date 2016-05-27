@@ -33,11 +33,20 @@ passport.use(new KeystoneStrategy({
     passReqToCallback : true // allows us to interact with req object
 }, function(req, identity, done) {
   if (!req.user) {
+
+    // Handle V3 API differences
+    var newCatalog = {};     
+    if (identity.serviceCatalog) {
+        newCatalog = identity.serviceCatalog;
+    } else  {
+        newCatalog = identity.raw.access.serviceCatalog;
+    }
+
     var user = {
         id: identity.user.id,
         token: identity.token.id,
         username: identity.user.name,
-        serviceCatalog: identity.raw.access.serviceCatalog
+        serviceCatalog: newCatalog
     };
 
     // Set session expiration to token expiration
