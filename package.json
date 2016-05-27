@@ -1,7 +1,7 @@
 {
   "name": "passport-keystone-v3",
-  "version": "0.1.2",
-  "description": "Fork of [passport-keystone](https://github.com/eddywashere/passport-keystone) supporting up to V3.x OpenStack Keystone for Passport and Node.js",
+  "version": "0.1.3",
+  "description": "Fork of passport-keystone supporting up to V 3.x OpenStack Keystone API for Passport and Node.js",
   "main": "./lib/passport-keystone",
   "scripts": {
   },
